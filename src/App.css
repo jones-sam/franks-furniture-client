@@ -12,3 +12,15 @@ a:hover {
   text-decoration: none;
   color: inherit;
 }
+
+/* Item Page */
+
+.item-quantity-input {
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.item-add-button {
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+}

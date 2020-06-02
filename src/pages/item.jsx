@@ -1,4 +1,6 @@
 import React, { Component } from "react"
+import Swal from "sweetalert2"
+import withReactContent from "sweetalert2-react-content"
 
 // Redux
 import { connect } from "react-redux"
@@ -14,6 +16,8 @@ import Button from "react-bootstrap/Button"
 
 // Icons
 import { FaShoppingCart } from "react-icons/fa"
+
+const MySwal = withReactContent(Swal)
 
 export class item extends Component {
   state = {
@@ -32,7 +36,16 @@ export class item extends Component {
   handleSubmit = (event) => {
     event.preventDefault()
     this.props.addToCart(this.props.data.item, Number(this.state.quantity))
-    console.log("Submitted")
+    MySwal.fire({
+      title: `Success!`,
+      html: `Added ${this.state.quantity}<b> \"${this.props.data.item.name}\"</b> to your cart!`,
+      timer: 5000,
+      timerProgressBar: true,
+      toast: true,
+      position: "bottom-end",
+      showConfirmButton: false,
+      icon: "success",
+    })
   }
   render() {
     const { item } = this.props.data
@@ -48,6 +61,7 @@ export class item extends Component {
             <Form inline className="mt-3" onSubmit={this.handleSubmit}>
               <Form.Control
                 name="quantity"
+                className="item-quantity-input"
                 onChange={this.handleChange}
                 size="lg"
                 type="number"
@@ -55,7 +69,7 @@ export class item extends Component {
                 value={this.state.quantity}
                 min="1"
               />
-              <Button size="lg" type="submit">
+              <Button size="lg" type="submit" className="item-add-button">
                 Add to Cart <FaShoppingCart />
               </Button>
             </Form>
