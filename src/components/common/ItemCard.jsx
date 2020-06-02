@@ -12,7 +12,7 @@ export class ItemCard extends Component {
         <Link to={`/items/${item.itemId}`}>
           <Card.Img variant="top" src="https://picsum.photos/250/150" />
           <Card.Body>
-            <Card.Title>{item.title}</Card.Title>
+            <Card.Title>{item.name}</Card.Title>
             <Card.Text>${item.price}</Card.Text>
           </Card.Body>
         </Link>
