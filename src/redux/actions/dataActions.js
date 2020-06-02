@@ -1,4 +1,4 @@
-import { SET_ITEMS, LOADING_DATA } from "../types"
+import { SET_ITEMS, SET_ITEM, LOADING_DATA } from "../types"
 import { db } from "../../util/firebase"
 
 export const getItems = () => (dispatch) => {
@@ -19,4 +19,14 @@ export const getItems = () => (dispatch) => {
     .catch((err) => console.error(err))
 }
 
-export const getItem = () => (dispatch) => {}
+export const getItem = (itemId) => (dispatch) => {
+  dispatch({ type: LOADING_DATA })
+  db.doc(`/items/${itemId}`)
+    .get()
+    .then((doc) => {
+      dispatch({ type: SET_ITEM, payload: doc.data() })
+    })
+    .catch((err) => {
+      console.error(err)
+    })
+}

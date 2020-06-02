@@ -1,8 +1,9 @@
-import { SET_ITEMS, LOADING_DATA } from "../types"
+import { SET_ITEMS, SET_ITEM, LOADING_DATA } from "../types"
 // import { createReducer } from "@reduxjs/toolkit"
 
 const initialState = {
   items: [],
+  item: {},
   loading: false,
 }
 
@@ -17,6 +18,12 @@ export default function (state = initialState, action) {
       return {
         ...state,
         items: action.payload,
+        loading: false,
+      }
+    case SET_ITEM:
+      return {
+        ...state,
+        item: action.payload,
         loading: false,
       }
     default:
