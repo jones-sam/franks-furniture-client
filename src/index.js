@@ -6,6 +6,16 @@ import store from "./redux/store"
 import { Provider } from "react-redux"
 import * as serviceWorker from "./serviceWorker"
 
+// import * as firebase from "firebase"
+
+// import firebaseConfig from "./util/firebaseConfig"
+
+// // Initialize Firebase
+// firebase.initializeApp(firebaseConfig)
+// firebase.analytics()
+
+// const db = firebase.firestore()
+
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
