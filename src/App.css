@@ -24,3 +24,10 @@ a:hover {
   border-bottom-left-radius: 0;
   border-top-left-radius: 0;
 }
+
+/* Cart Page */
+
+.cart-total-box {
+  position: sticky;
+  top: 32px;
+}

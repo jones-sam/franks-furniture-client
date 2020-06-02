@@ -9,7 +9,6 @@ import Form from "react-bootstrap/Form"
 import FormControl from "react-bootstrap/FormControl"
 import Button from "react-bootstrap/Button"
 import Badge from "react-bootstrap/Badge"
-import { LinkContainer } from "react-router-bootstrap"
 
 // Icons
 import { FaShoppingCart } from "react-icons/fa"
@@ -28,10 +27,12 @@ export class MainNavbar extends Component {
           <Nav className="w-100">
             <NavItem className="ml-auto">
               <Link to="/cart" className="text-white">
-                <b>Cart </b>
+                <b> Cart </b>
+                <FaShoppingCart />{" "}
               </Link>
-
-              <Badge variant="success">{totalQuantity}</Badge>
+              {totalQuantity > 0 ? (
+                <Badge variant="success">{totalQuantity}</Badge>
+              ) : null}
             </NavItem>
           </Nav>
           {/* <Form inline>

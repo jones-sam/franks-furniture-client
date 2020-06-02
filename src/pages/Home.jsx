@@ -18,7 +18,7 @@ class home extends Component {
 
     const listOfItems = !loading
       ? items.map((item, index) => (
-          <Col key={item.itemId} lg={4}>
+          <Col key={item.itemId} lg={4} className="mb-4">
             <ItemCard item={item} />
           </Col>
         ))

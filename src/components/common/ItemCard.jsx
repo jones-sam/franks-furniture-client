@@ -8,9 +8,14 @@ export class ItemCard extends Component {
   render() {
     const { item } = this.props
     return (
-      <Card style={{ width: "18rem" }}>
+      <Card className="align-self-center">
         <Link to={`/items/${item.itemId}`}>
-          <Card.Img variant="top" src="https://picsum.photos/250/150" />
+          <Card.Img
+            variant="top"
+            src={item.itemImage}
+            height="200"
+            // width="250"
+          />
           <Card.Body>
             <Card.Title>{item.name}</Card.Title>
             <Card.Text>${item.price}</Card.Text>
