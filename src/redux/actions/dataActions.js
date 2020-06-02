@@ -1,4 +1,4 @@
-import { SET_ITEMS, SET_ITEM, LOADING_DATA } from "../types"
+import { SET_ITEMS, SET_ITEM, LOADING_DATA, SET_CART } from "../types"
 import { db } from "../../util/firebase"
 
 export const getItems = () => (dispatch) => {
@@ -7,7 +7,6 @@ export const getItems = () => (dispatch) => {
     .get()
     .then((data) => {
       let items = []
-      console.log(data.docs)
       data.docs.forEach((doc) => {
         items.push({
           itemId: doc.id,
@@ -24,9 +23,13 @@ export const getItem = (itemId) => (dispatch) => {
   db.doc(`/items/${itemId}`)
     .get()
     .then((doc) => {
-      dispatch({ type: SET_ITEM, payload: doc.data() })
+      dispatch({ type: SET_ITEM, payload: { itemId: doc.id, ...doc.data() } })
     })
     .catch((err) => {
       console.error(err)
     })
+}
+
+export const addToCart = (item, quantity) => (dispatch) => {
+  dispatch({ type: SET_CART, payload: { ...item, quantity } })
 }

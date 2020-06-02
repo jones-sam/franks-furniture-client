@@ -19,7 +19,6 @@ class home extends Component {
     const listOfItems = !loading
       ? items.map((item, index) => (
           <Col key={item.itemId} lg={4}>
-            {console.log(`${index}: ${item.itemId}`)}
             <ItemCard item={item} />
           </Col>
         ))

@@ -2,7 +2,7 @@ import React, { Component } from "react"
 
 // Redux
 import { connect } from "react-redux"
-import { getItem } from "../redux/actions/dataActions"
+import { getItem, addToCart } from "../redux/actions/dataActions"
 
 // Bootstrap
 import Container from "react-bootstrap/Container"
@@ -16,12 +16,22 @@ import Button from "react-bootstrap/Button"
 import { FaShoppingCart } from "react-icons/fa"
 
 export class item extends Component {
+  state = {
+    quantity: 1,
+  }
   componentDidMount() {
     this.props.getItem(this.props.match.params.itemId)
   }
 
+  handleChange = (event) => {
+    this.setState({
+      [event.target.name]: event.target.value,
+    })
+  }
+
   handleSubmit = (event) => {
     event.preventDefault()
+    this.props.addToCart(this.props.data.item, Number(this.state.quantity))
     console.log("Submitted")
   }
   render() {
@@ -37,9 +47,12 @@ export class item extends Component {
             <h5>${item.price}</h5>
             <Form inline className="mt-3" onSubmit={this.handleSubmit}>
               <Form.Control
+                name="quantity"
+                onChange={this.handleChange}
                 size="lg"
                 type="number"
                 placeholder="Quantity"
+                value={this.state.quantity}
                 min="1"
               />
               <Button size="lg" type="submit">
@@ -63,6 +76,6 @@ const mapStateToProps = (state) => ({
   data: state.data,
 })
 
-const mapDispatchToProps = { getItem }
+const mapDispatchToProps = { getItem, addToCart }
 
 export default connect(mapStateToProps, mapDispatchToProps)(item)
