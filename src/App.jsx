@@ -3,14 +3,15 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
 import "bootstrap/dist/css/bootstrap.css"
 import home from "./pages/home"
 import item from "./pages/item"
-import Navbar from "./components/layout/Navbar"
+import MainNavbar from "./components/layout/MainNavbar"
 import "./App.css"
+import store from "store"
 
 class App extends Component {
   render() {
     return (
       <Router>
-        <Navbar />
+        <MainNavbar />
         <Switch>
           <Route exact path="/" component={home} />
           <Route exact path="/items/:itemId" component={item} />

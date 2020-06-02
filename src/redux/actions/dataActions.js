@@ -1,4 +1,10 @@
-import { SET_ITEMS, SET_ITEM, LOADING_DATA, SET_CART } from "../types"
+import {
+  SET_ITEMS,
+  SET_ITEM,
+  LOADING_DATA,
+  SET_CART,
+  INIT_CART,
+} from "../types"
 import { db } from "../../util/firebase"
 
 export const getItems = () => (dispatch) => {

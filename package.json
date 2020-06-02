@@ -17,6 +17,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "redux-thunk": "^2.3.0",
+    "store": "^2.0.12",
     "sweetalert2": "^9.14.0",
     "sweetalert2-react-content": "^3.0.1"
   },

@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import Swal from "sweetalert2"
 import withReactContent from "sweetalert2-react-content"
+import store from "store"
 
 // Redux
 import { connect } from "react-redux"
@@ -16,6 +17,7 @@ import Button from "react-bootstrap/Button"
 
 // Icons
 import { FaShoppingCart } from "react-icons/fa"
+import { Link } from "react-router-dom"
 
 const MySwal = withReactContent(Swal)
 
@@ -25,6 +27,10 @@ export class item extends Component {
   }
   componentDidMount() {
     this.props.getItem(this.props.match.params.itemId)
+  }
+
+  componentDidUpdate() {
+    store.set("cart", this.props.data.cart)
   }
 
   handleChange = (event) => {
@@ -38,7 +44,7 @@ export class item extends Component {
     this.props.addToCart(this.props.data.item, Number(this.state.quantity))
     MySwal.fire({
       title: `Success!`,
-      html: `Added ${this.state.quantity}<b> \"${this.props.data.item.name}\"</b> to your cart!`,
+      html: `Added ${this.state.quantity}<b> "${this.props.data.item.name}"</b> to your cart!`,
       timer: 5000,
       timerProgressBar: true,
       toast: true,
