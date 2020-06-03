@@ -1,5 +1,7 @@
 import React, { Component, Fragment } from "react"
 import { connect } from "react-redux"
+import { Link } from "react-router-dom"
+import StripePayment from "../components/StripePayment"
 
 // Bootstrap
 import Container from "react-bootstrap/Container"
@@ -7,14 +9,39 @@ import Row from "react-bootstrap/Row"
 import Col from "react-bootstrap/Col"
 import ListGroup from "react-bootstrap/ListGroup"
 import Image from "react-bootstrap/Image"
-import { Link } from "react-router-dom"
 import Button from "react-bootstrap/Button"
+import Modal from "react-modal"
 import { FaShoppingCart } from "react-icons/fa"
 
+// Stripe
+import { Elements } from "@stripe/react-stripe-js"
+import { loadStripe } from "@stripe/stripe-js"
+
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PK)
+
+Modal.setAppElement("#root")
+
+const modalStyle = {
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+  },
+}
 export class cart extends Component {
+  state = {
+    showModal: false,
+  }
+
+  handleOpenModal = () => {
+    this.setState({ showModal: true })
+  }
+
   render() {
-    const { items, totalCost, totalQuanity } = this.props.data.cart
-    console.log(items)
+    const { items, totalCost } = this.props.data.cart
     return (
       <Container>
         <h1>Your Cart</h1>
@@ -56,7 +83,16 @@ export class cart extends Component {
                   <h4>${totalCost.toFixed(2)}</h4>
                 </ListGroup.Item>
                 <ListGroup.Item>
-                  <Button variant="success" className="w-100">
+                  <Button
+                    variant="success"
+                    className="w-100"
+                    onClick={this.handleOpenModal}
+                  >
+                    <Modal isOpen={this.state.showModal} style={modalStyle}>
+                      <Elements stripe={stripePromise}>
+                        <StripePayment />
+                      </Elements>
+                    </Modal>
                     <b>Checkout </b>
                     <FaShoppingCart />
                   </Button>

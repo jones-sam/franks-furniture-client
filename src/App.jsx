@@ -5,7 +5,11 @@ import home from "./pages/home"
 import item from "./pages/item"
 import cart from "./pages/cart"
 import MainNavbar from "./components/layout/MainNavbar"
-import "./App.css"
+import "./App.scss"
+import axios from "axios"
+
+axios.defaults.baseURL =
+  "https://us-central1-franks-furniture.cloudfunctions.net/api"
 
 class App extends Component {
   render() {

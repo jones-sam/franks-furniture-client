@@ -1,10 +1,4 @@
-import {
-  SET_ITEMS,
-  SET_ITEM,
-  SET_CART,
-  LOADING_DATA,
-  INIT_CART,
-} from "../types"
+import { SET_ITEMS, SET_ITEM, SET_CART, LOADING_DATA } from "../types"
 
 const initialState = {
   items: [],
