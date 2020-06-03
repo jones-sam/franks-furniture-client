@@ -9,13 +9,7 @@ import Button from "react-bootstrap/Button"
 import { FaLock } from "react-icons/fa"
 
 // Stripe
-import {
-  Elements,
-  CardElement,
-  useStripe,
-  useElements,
-} from "@stripe/react-stripe-js"
-import { loadStripe } from "@stripe/stripe-js"
+import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js"
 
 function StripePayment(props) {
   const [succeeded, setSucceeded] = useState(false)
