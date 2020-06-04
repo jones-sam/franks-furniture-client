@@ -18,8 +18,8 @@ export const getItems = () => (dispatch) => {
           itemId: doc.id,
           ...doc.data(),
         })
-        dispatch({ type: SET_ITEMS, payload: items })
       })
+      dispatch({ type: SET_ITEMS, payload: items })
     })
     .catch((err) => console.error(err))
 }
