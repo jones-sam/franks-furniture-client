@@ -3,9 +3,10 @@ import {
   SET_ITEM,
   LOADING_DATA,
   SET_CART,
-  INIT_CART,
+  CLEAR_CART,
 } from "../types"
 import { db } from "../../util/firebase"
+import store from "store"
 
 export const getItems = () => (dispatch) => {
   dispatch({ type: LOADING_DATA })
@@ -38,4 +39,9 @@ export const getItem = (itemId) => (dispatch) => {
 
 export const addToCart = (item, quantity) => (dispatch) => {
   dispatch({ type: SET_CART, payload: { ...item, quantity } })
+}
+
+export const clearCart = () => (dispatch) => {
+  dispatch({ type: CLEAR_CART })
+  store.remove("cart")
 }

@@ -1,4 +1,10 @@
-import { SET_ITEMS, SET_ITEM, SET_CART, LOADING_DATA } from "../types"
+import {
+  SET_ITEMS,
+  SET_ITEM,
+  SET_CART,
+  LOADING_DATA,
+  CLEAR_CART,
+} from "../types"
 
 const initialState = {
   items: [],
@@ -66,6 +72,11 @@ export default function (state = initialState, action) {
         ...state,
         cart: { items: newCart, totalQuantity, totalCost },
         loading: false,
+      }
+    case CLEAR_CART:
+      return {
+        ...state,
+        cart: {},
       }
 
     default:

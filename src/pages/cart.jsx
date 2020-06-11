@@ -10,8 +10,12 @@ import Col from "react-bootstrap/Col"
 import ListGroup from "react-bootstrap/ListGroup"
 import Image from "react-bootstrap/Image"
 import Button from "react-bootstrap/Button"
-import Modal from "react-modal"
+import Modal from "react-bootstrap/Modal"
+// import Modal from "react-modal"
+
+// Icons
 import { FaShoppingCart } from "react-icons/fa"
+import { IoMdClose } from "react-icons/io"
 
 // Stripe
 import { Elements } from "@stripe/react-stripe-js"
@@ -19,18 +23,6 @@ import { loadStripe } from "@stripe/stripe-js"
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PK)
 
-Modal.setAppElement("#root")
-
-const modalStyle = {
-  content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)",
-  },
-}
 export class cart extends Component {
   state = {
     showModal: false,
@@ -39,13 +31,17 @@ export class cart extends Component {
   handleOpenModal = () => {
     this.setState({ showModal: true })
   }
+  handleCloseModal = () => {
+    this.setState({ showModal: false })
+  }
 
   render() {
+    console.log(this.state)
     const { items, totalCost } = this.props.data.cart
     return (
       <Container>
         <h1>Your Cart</h1>
-        {items.length > 0 ? (
+        {items && items.length > 0 ? (
           <Row>
             <Col lg={9}>
               <ListGroup className="w-100">
@@ -88,11 +84,6 @@ export class cart extends Component {
                     className="w-100"
                     onClick={this.handleOpenModal}
                   >
-                    <Modal isOpen={this.state.showModal} style={modalStyle}>
-                      <Elements stripe={stripePromise}>
-                        <StripePayment />
-                      </Elements>
-                    </Modal>
                     <b>Checkout </b>
                     <FaShoppingCart />
                   </Button>
@@ -108,6 +99,22 @@ export class cart extends Component {
             </Link>
           </>
         )}
+        <Modal
+          show={this.state.showModal}
+          onHide={this.handleCloseModal}
+          style={{ opacity: 1 }}
+          size="lg"
+          centered
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>Frank's Furniture Checkout</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Elements stripe={stripePromise}>
+              <StripePayment />
+            </Elements>
+          </Modal.Body>
+        </Modal>
       </Container>
     )
   }
