@@ -14,6 +14,7 @@ import Col from "react-bootstrap/Col"
 import Image from "react-bootstrap/Image"
 import Form from "react-bootstrap/Form"
 import Button from "react-bootstrap/Button"
+import Spinner from "react-bootstrap/Spinner"
 
 // Icons
 import { FaShoppingCart } from "react-icons/fa"
@@ -54,39 +55,47 @@ export class item extends Component {
     })
   }
   render() {
-    const { item } = this.props.data
+    const { item, loading } = this.props.data
     return (
       <Container>
-        <Row>
-          <Col md={4}>
-            <Image src={item.itemImage} thumbnail></Image>
-          </Col>
-          <Col md={8}>
-            <h2>{item.name}</h2>
-            <h5>${item.price}</h5>
-            <Form inline className="mt-3" onSubmit={this.handleSubmit}>
-              <Form.Control
-                name="quantity"
-                className="item-quantity-input"
-                onChange={this.handleChange}
-                size="lg"
-                type="number"
-                placeholder="Quantity"
-                value={this.state.quantity}
-                min="1"
-              />
-              <Button size="lg" type="submit" className="item-add-button">
-                Add to Cart <FaShoppingCart />
-              </Button>
-            </Form>
-          </Col>
-        </Row>
-        <Row className="mt-5">
-          <Col>
-            <h4>About this item</h4>
-            <p>{item.description}</p>
-          </Col>
-        </Row>
+        {!loading ? (
+          <>
+            <Row>
+              <Col md={4}>
+                <Image src={item.itemImage} thumbnail></Image>
+              </Col>
+              <Col md={8}>
+                <h2>{item.name}</h2>
+                <h5>${item.price}</h5>
+                <Form inline className="mt-3" onSubmit={this.handleSubmit}>
+                  <Form.Control
+                    name="quantity"
+                    className="item-quantity-input"
+                    onChange={this.handleChange}
+                    size="lg"
+                    type="number"
+                    placeholder="Quantity"
+                    value={this.state.quantity}
+                    min="1"
+                  />
+                  <Button size="lg" type="submit" className="item-add-button">
+                    Add to Cart <FaShoppingCart />
+                  </Button>
+                </Form>
+              </Col>
+            </Row>
+            <Row className="mt-5">
+              <Col>
+                <h4>About this item</h4>
+                <p>{item.description}</p>
+              </Col>
+            </Row>
+          </>
+        ) : (
+          <div className="d-flex justify-content-center">
+            <Spinner animation="grow" />
+          </div>
+        )}
       </Container>
     )
   }

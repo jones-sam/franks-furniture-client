@@ -140,7 +140,7 @@ function StripePayment(props) {
             variant="outline-success"
           >
             <FaLock />
-            {` Pay ${props.data.cart.totalCost.toFixed(2)}`}
+            {` Pay $${props.data.cart.totalCost.toFixed(2)}`}
           </Button>
           {error && (
             <div className="card-error" role="alert">
