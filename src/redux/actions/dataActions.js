@@ -43,5 +43,9 @@ export const addToCart = (item, quantity) => (dispatch) => {
 
 export const clearCart = () => (dispatch) => {
   dispatch({ type: CLEAR_CART })
-  store.remove("cart")
+  store.set("cart", {
+    items: [],
+    totalCost: 0,
+    totalQuantity: 0,
+  })
 }

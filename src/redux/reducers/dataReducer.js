@@ -76,7 +76,7 @@ export default function (state = initialState, action) {
     case CLEAR_CART:
       return {
         ...state,
-        cart: {},
+        cart: { items: [], totalCost: 0, totalQuantity: 0 },
       }
 
     default:
