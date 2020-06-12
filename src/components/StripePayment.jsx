@@ -68,6 +68,12 @@ function StripePayment(props) {
 
     const payload = await stripe.confirmCardPayment(clientSecret, {
       receipt_email: email,
+      shipping: {
+        address: {
+          line1: address,
+        },
+        name: fullName,
+      },
       payment_method: {
         card: elements.getElement(CardElement),
         billing_details: {
@@ -134,7 +140,7 @@ function StripePayment(props) {
             variant="outline-success"
           >
             <FaLock />
-            Pay
+            {` Pay ${props.data.cart.totalCost.toFixed(2)}`}
           </Button>
           {error && (
             <div className="card-error" role="alert">
